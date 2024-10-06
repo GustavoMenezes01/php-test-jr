@@ -20,13 +20,18 @@ Sistema simples de gerenciamento de biblioteca que permite aos usuários adicion
 
 ## Dependências
 1. composer install
+   ```bash
+   composer install
 
 ## Executar a aplicação
 1. Navegue até o diretório public e execute:
-    php index.php
+   ```bash
+   php index.php
 
 ## Executando os testes
-1. Na raiz do projeto execute esse comando: ./vendor/bin/phpunit --configuration phpunit.xml
+1. Na raiz do projeto execute esse comando:
+   ```bash
+   ./vendor/bin/phpunit --configuration phpunit.xml
  
 ## Estrutura do Diretório
 1. App/: Contém a lógica principal da aplicação, incluindo modelos, repositórios e serviços.
