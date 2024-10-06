@@ -2,27 +2,49 @@
 
 namespace App\Services;
 
-class BookRepository {
-    private array $books = [];
+/**
+ * Class LoanService
+ * Provides business logic for managing loan transactions, including creating loans and returning books.
+ */
+class LoanService {
+    private LoanRepository $loanRepository;
 
-    public function save(Book $book): void {
-        $this->books[] = $book;
+    /**
+     * Constructor to initialize the LoanService with a LoanRepository.
+     *
+     * @param LoanRepository $loanRepository
+     */
+    public function __construct(LoanRepository $loanRepository) {
+        $this->loanRepository = $loanRepository;
     }
 
-    public function deleteByIsbn(string $isbn): void {
-        $this->books = array_filter($this->books, function(Book $book) use ($isbn) {
-            return $book->getIsbn() !== $isbn;
-        });
+    /**
+     * Creates a new loan for a book by a user and saves it in the repository.
+     *
+     * @param Book $book
+     * @param User $user
+     * @return Loan
+     */
+    public function createLoan(Book $book, User $user): Loan {
+        $loan = new Loan($book, $user, new DateTime());
+        $this->loanRepository->save($loan);
+        return $loan;
     }
 
-    public function getAll(): array {
-        return $this->books;
+    /**
+     * Marks a loan as returned and updates the loan in the repository.
+     *
+     * @param Loan $loan
+     */
+    public function returnBook(Loan $loan): void {
+        $loan->markAsReturned();
+        $this->loanRepository->update($loan);
     }
 
-    public function findByIsbn(string $isbn): ?Book {
-        foreach ($this->books as $book) {
-            if ($book->getIsbn() === $isbn) {
-                return $book;
+    public function findLoanByBookIsbn(string $isbn): ?Loan {
+        foreach ($this->loanRepository->getAll() as $loan) {
+            if ($loan->getBook()->getIsbn() === $isbn) {
+                return $loan;
             }
         }
         return null;
