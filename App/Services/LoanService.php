@@ -2,6 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\Book;
+use App\Models\User;
+use App\Models\Loan;
+use App\Repositories\LoanRepository;
+use DateTime;
+
 /**
  * Class LoanService
  * Provides business logic for managing loan transactions, including creating loans and returning books.

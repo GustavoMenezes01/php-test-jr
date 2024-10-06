@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-
+use App\Models\Book;
+use App\Repositories\BookRepository;
 /**
  * Class BookService
  * Provides business logic for managing books, including adding, removing, and listing books.
