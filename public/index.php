@@ -1,12 +1,13 @@
 <?php
 
-require_once '../App/Models/Book.php';
-require_once '../App/Models/User.php';
-require_once '../App/Models/Loan.php';
-require_once '../App/Repositories/BookRepository.php';
-require_once '../App/Repositories/LoanRepository.php';
-require_once '../App/Services/BookService.php';
-require_once '../App/Services/LoanService.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+use App\Models\Book;
+use App\Models\User;
+use App\Models\Loan;
+use App\Repositories\BookRepository;
+use App\Repositories\LoanRepository;
+use App\Services\BookService;
+use App\Services\LoanService;
 
 $bookRepository = new BookRepository();
 $bookService = new BookService($bookRepository);
